@@ -27,7 +27,7 @@ export const Navbar = () => {
       <AppBar
       position="fixed"
       sx={{
-        zIndex: (theme) => theme.zIndex.drawer + 1,
+        zIndex: (theme) => theme.zIndex.drawer + 1
         }}>
         <Toolbar>
           <IconButton
