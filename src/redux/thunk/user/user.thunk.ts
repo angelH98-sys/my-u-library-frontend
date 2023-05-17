@@ -3,7 +3,10 @@ import {
   authQuerySucceed,
   executingAuthQuery,
 } from "../../slice/auth/auth.slice";
-import { signinToFirebase } from "../../../client/firebase/firebase.client";
+import {
+  signinToFirebase,
+  signoutFromFirebase,
+} from "../../../client/firebase/firebase.client";
 import { getFirebaseErrorMessage } from "../../../helper/firebase.error.parser";
 import { getRoleFromLoggedUser } from "../../../client/backend/user.client";
 
@@ -29,6 +32,20 @@ export const startSignIn = (email: string, password: string) => {
       ? dispatch(
           authQuerySucceed({ records: { uid, email, displayName, role } })
         )
+      : dispatch(authQueryFailed({ errors: [errorMessage] }));
+  };
+};
+
+export const logoutFromFirebase = () => {
+  return async (dispatch: any) => {
+    const response = await signoutFromFirebase();
+
+    const errorMessage = !!response.errorCode
+      ? getFirebaseErrorMessage(response.errorCode)
+      : null;
+
+    response.ok
+      ? dispatch(authQueryFailed({}))
       : dispatch(authQueryFailed({ errors: [errorMessage] }));
   };
 };

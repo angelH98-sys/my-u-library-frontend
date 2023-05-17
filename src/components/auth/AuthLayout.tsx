@@ -4,7 +4,7 @@ import Image from "../../assets/library.jpg";
 
 export const AuthLayout = () => {
   return (
-    <Grid container component="main" sx={{ height: "100vh"}}>
+    <Grid container component="main" sx={{ height: "100vh" }}>
       <Grid
         item
         xs={false}
@@ -20,4 +20,4 @@ export const AuthLayout = () => {
       <Outlet />
     </Grid>
   );
-}
+};
