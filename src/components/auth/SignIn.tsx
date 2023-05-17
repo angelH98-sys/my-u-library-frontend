@@ -29,9 +29,11 @@ export const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const { status, errors: storeErrors } = useSelector(
-    (state: any) => state.auth
-  );
+  const {
+    status,
+    errors: storeErrors,
+    isExecutingRequest,
+  } = useSelector((state: any) => state.auth);
 
   const {
     handleSubmit,
@@ -52,7 +54,7 @@ export const SignIn = () => {
   };
 
   useEffect(() => {
-    status == "authenticated" && navigate("/");
+    !isExecutingRequest && status == "authenticated" && navigate("/");
   }, [status]);
 
   return (

@@ -6,7 +6,7 @@ import { UserRoutes } from "./user.routes";
 export const AppRouter = createBrowserRouter([
   {
     path: "/",
-    element: <MyULibrary/>,
+    element: <MyULibrary />,
     children: [AuthRoutes, ...UserRoutes],
-  }
+  },
 ]);

@@ -8,4 +8,13 @@ export const navbar = {
       button: "Sign out",
     },
   },
+  user: {
+    button: "Users",
+    create: {
+      button: "Create user",
+    },
+    list: {
+      button: "User list",
+    },
+  },
 };

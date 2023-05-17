@@ -7,16 +7,14 @@ import {
   AppBar,
   Box,
   Collapse,
+  Divider,
   Drawer,
-  Hidden,
   IconButton,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Menu,
-  MenuItem,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -27,6 +25,9 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import CloseIcon from "@mui/icons-material/Close";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
+import ContactPageIcon from "@mui/icons-material/ContactPage";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import { logoutFromFirebase } from "../../redux/thunk/user/user.thunk";
 
 const appName = import.meta.env.VITE_APP_NAME;
@@ -34,9 +35,14 @@ export const Navbar = () => {
   const { t } = useTranslation();
   const [toggle, setToggle] = useState({
     drawer: false,
+    account: false,
     user: false,
   });
-  const { status: userAuth } = useSelector((state: any) => state.auth);
+  const {
+    status: userAuth,
+    records,
+    isExecutingRequest,
+  } = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
@@ -110,15 +116,61 @@ export const Navbar = () => {
         <Box sx={{ width: "auto" }} role="presentation">
           <List>
             <ListItem disablePadding>
-              <ListItemButton onClick={changeToggle("user", !toggle["user"])}>
+              <ListItemButton
+                onClick={changeToggle("user", !toggle["user"])}
+                sx={{
+                  display:
+                    userAuth === "authenticated" && records.role == "lib"
+                      ? ""
+                      : "none",
+                }}
+              >
                 <ListItemIcon>
-                  <AccountCircle />
+                  <ContactPageIcon />
                 </ListItemIcon>
-                <ListItemText primary={t("ui.navbar.account.button")} />
+                <ListItemText primary={t("ui.navbar.user.button")} />
                 {toggle["user"] ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
             </ListItem>
             <Collapse in={toggle["user"]} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemButton
+                  sx={{
+                    pl: 4,
+                  }}
+                  onClick={(event) => navigate("/user/create")}
+                >
+                  <ListItemIcon>
+                    <PersonAddIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={t("ui.navbar.user.create.button")} />
+                </ListItemButton>
+                <ListItemButton
+                  sx={{
+                    pl: 4,
+                  }}
+                  onClick={(event) => navigate("/user/list")}
+                >
+                  <ListItemIcon>
+                    <FormatListBulletedIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={t("ui.navbar.user.list.button")} />
+                </ListItemButton>
+              </List>
+            </Collapse>
+            <Divider />
+            <ListItem disablePadding>
+              <ListItemButton
+                onClick={changeToggle("account", !toggle["account"])}
+              >
+                <ListItemIcon>
+                  <AccountCircle />
+                </ListItemIcon>
+                <ListItemText primary={t("ui.navbar.account.button")} />
+                {toggle["account"] ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+            </ListItem>
+            <Collapse in={toggle["account"]} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                 <ListItemButton
                   sx={{

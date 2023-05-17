@@ -8,7 +8,36 @@ import {
   signoutFromFirebase,
 } from "../../../client/firebase/firebase.client";
 import { getFirebaseErrorMessage } from "../../../helper/firebase.error.parser";
-import { getRoleFromLoggedUser } from "../../../client/backend/user.client";
+import {
+  createUser,
+  getPaginatedUsers,
+  getRoleFromLoggedUser,
+} from "../../../client/backend/user.client";
+import {
+  executingUserQuery,
+  userQueryFailed,
+  userQuerySucceed,
+} from "../../slice/user/user.slice";
+import { getBackendErrorMessages } from "../../../helper/backend.error.parser";
+
+export const startUserCreation = (formData: {
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+}) => {
+  return async (dispatch: any) => {
+    dispatch(executingUserQuery({ formData }));
+
+    const { data, errors } = await createUser();
+
+    const errorMessages = errors ? getBackendErrorMessages(errors) : "";
+
+    errors
+      ? dispatch(userQueryFailed({ errors: errorMessages }))
+      : dispatch(userQuerySucceed({ records: data.records }));
+  };
+};
 
 export const startSignIn = (email: string, password: string) => {
   return async (dispatch: any) => {
@@ -47,5 +76,21 @@ export const logoutFromFirebase = () => {
     response.ok
       ? dispatch(authQueryFailed({}))
       : dispatch(authQueryFailed({ errors: [errorMessage] }));
+  };
+};
+
+export const startGetPaginatedUsers = (limit: any, skip: any) => {
+  return async (dispatch: any) => {
+    dispatch(executingUserQuery({}));
+
+    const { data, errors } = await getPaginatedUsers(limit, skip);
+
+    const errorMessages = errors ? getBackendErrorMessages(errors) : "";
+
+    errors
+      ? dispatch(userQueryFailed({ errors: errorMessages }))
+      : dispatch(
+          userQuerySucceed({ records: data.records, _metadata: data._metadata })
+        );
   };
 };
