@@ -17,4 +17,10 @@ export const navbar = {
       button: "User list",
     },
   },
+  book: {
+    button: "Books",
+    create: {
+      button: "Create book",
+    },
+  },
 };

@@ -27,7 +27,10 @@ import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import BookIcon from "@mui/icons-material/Book";
+
 import { logoutFromFirebase } from "../../redux/thunk/user/user.thunk";
 
 const appName = import.meta.env.VITE_APP_NAME;
@@ -37,6 +40,7 @@ export const Navbar = () => {
     drawer: false,
     account: false,
     user: false,
+    book: false,
   });
   const {
     status: userAuth,
@@ -115,6 +119,30 @@ export const Navbar = () => {
         <Toolbar />
         <Box sx={{ width: "auto" }} role="presentation">
           <List>
+            <ListItem disablePadding>
+              <ListItemButton onClick={changeToggle("book", !toggle["book"])}>
+                <ListItemIcon>
+                  <BookIcon />
+                </ListItemIcon>
+                <ListItemText primary={t("ui.navbar.book.button")} />
+                {toggle["book"] ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+            </ListItem>
+            <Collapse in={toggle["book"]} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemButton
+                  sx={{
+                    pl: 4,
+                  }}
+                  onClick={(event) => navigate("/book/create")}
+                >
+                  <ListItemIcon>
+                    <BookmarkAddIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={t("ui.navbar.book.create.button")} />
+                </ListItemButton>
+              </List>
+            </Collapse>
             <ListItem disablePadding>
               <ListItemButton
                 onClick={changeToggle("user", !toggle["user"])}

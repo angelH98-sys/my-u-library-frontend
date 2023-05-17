@@ -6,4 +6,7 @@ export const tittles = {
   auth: {
     signin: "Sign in",
   },
+  book: {
+    form: "New book",
+  },
 };
