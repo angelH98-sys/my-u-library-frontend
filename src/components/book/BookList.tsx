@@ -73,7 +73,7 @@ export const BookList = () => {
   }, [rowsPerPage, page]);
 
   const handleChangePage = (
-    event: MouseEvent<HTMLButtonElement> | null,
+    _event: MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
     setPage(newPage);
@@ -91,7 +91,7 @@ export const BookList = () => {
     setValue("searchParam", searchParam);
   };
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (_data: any) => {
     setPage(0);
     dispatch(
       startGetPaginatedBooks(
@@ -214,7 +214,7 @@ export const BookList = () => {
                   return (
                     <TableRow
                       key={r._id}
-                      onClick={(event: any) =>
+                      onClick={(_event: any) =>
                         navigate(`/book/detail/${r._id}`)
                       }
                     >

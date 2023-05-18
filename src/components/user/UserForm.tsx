@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -29,14 +29,13 @@ import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 
 import { startUserCreation } from "../../redux/thunk/user/user.thunk";
 import { setUserInitialState } from "../../redux/slice/user/user.slice";
-
-const rolesAvailable: String[] = import.meta.env.VITE_USER_ROLES.split(",");
+import { useAppDispatch } from "../../redux/store/store.redux";
 
 export const UserForm = () => {
   const { t } = useTranslation();
   const [role, setRole] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -69,7 +68,7 @@ export const UserForm = () => {
     }
   }, [records]);
 
-  const onDialogClose = (event: any) => {
+  const onDialogClose = (_event: any) => {
     setOpenDialog(false);
     navigate("/user/list");
   };
@@ -168,11 +167,8 @@ export const UserForm = () => {
                 },
               })}
             >
-              {rolesAvailable.map((r) => (
-                <MenuItem key={r} value={r}>
-                  {t(`form.label.user.${r}`)}
-                </MenuItem>
-              ))}
+              <MenuItem value="std">{t(`form.label.user.std`)}</MenuItem>
+              <MenuItem value="lib">{t(`form.label.user.lib`)}</MenuItem>
             </Select>
             <FormHelperText>
               {!!errors.role ? errors.role.message : ""}

@@ -1,6 +1,5 @@
 import { AuthLayout } from "../../components/auth/AuthLayout";
 import { SignIn } from "../../components/auth/SignIn";
-import { userAlreadyLogged } from "../loader/user.loader";
 
 export const AuthRoutes = {
   path: "auth",
@@ -9,7 +8,6 @@ export const AuthRoutes = {
     {
       path: "signin",
       element: <SignIn />,
-      //loader: userAlreadyLogged,
     },
   ],
 };

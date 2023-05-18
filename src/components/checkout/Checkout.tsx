@@ -50,7 +50,7 @@ export const Checkout = () => {
   }, [rowsPerPage, page]);
 
   const handleChangePage = (
-    event: MouseEvent<HTMLButtonElement> | null,
+    _event: MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
     setPage(newPage);
@@ -135,7 +135,7 @@ export const Checkout = () => {
                   return (
                     <TableRow
                       key={r._id}
-                      onClick={(event) => onUpdateClick(r._id)}
+                      onClick={(_event) => onUpdateClick(r._id)}
                     >
                       <TableCell component="td">{r.book}</TableCell>
                       <TableCell component="td">{r.student}</TableCell>

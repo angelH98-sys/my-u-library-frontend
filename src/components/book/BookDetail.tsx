@@ -57,7 +57,7 @@ export const BookDetail = () => {
     }
   }, [checkoutRecords]);
 
-  const onCheckoutCreate = (event: any) => {
+  const onCheckoutCreate = (_event: any) => {
     dispatch(startCheckoutCreate(records[0]._id));
   };
 

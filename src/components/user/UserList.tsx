@@ -1,6 +1,6 @@
 import { useEffect, useState, MouseEvent, ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import {
   Grid,
@@ -20,10 +20,11 @@ import {
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 
 import { startGetPaginatedUsers } from "../../redux/thunk/user/user.thunk";
+import { useAppDispatch } from "../../redux/store/store.redux";
 
 export const UserList = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { records, _metadata, isExecutingRequest } = useSelector(
     (store: any) => store.user
   );
@@ -40,7 +41,7 @@ export const UserList = () => {
   }, [rowsPerPage, page]);
 
   const handleChangePage = (
-    event: MouseEvent<HTMLButtonElement> | null,
+    _event: MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
     setPage(newPage);

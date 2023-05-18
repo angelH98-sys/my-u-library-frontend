@@ -1,6 +1,6 @@
 import { useState, KeyboardEvent, MouseEvent, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import {
@@ -36,6 +36,7 @@ import ContentPasteGoIcon from "@mui/icons-material/ContentPasteGo";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 
 import { logoutFromFirebase } from "../../redux/thunk/user/user.thunk";
+import { useAppDispatch } from "../../redux/store/store.redux";
 
 const appName = import.meta.env.VITE_APP_NAME;
 export const Navbar = () => {
@@ -49,7 +50,7 @@ export const Navbar = () => {
   });
   const { status: userAuth, records } = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const location = useLocation();
 
   const changeToggle =
@@ -141,7 +142,7 @@ export const Navbar = () => {
                         ? "none"
                         : "",
                   }}
-                  onClick={(event) => navigate(`/checkout/${records.uid}`)}
+                  onClick={(_event) => navigate(`/checkout/${records.uid}`)}
                 >
                   <ListItemIcon>
                     <ReceiptIcon />
@@ -158,7 +159,7 @@ export const Navbar = () => {
                         ? ""
                         : "none",
                   }}
-                  onClick={(event) => navigate("/checkout")}
+                  onClick={(_event) => navigate("/checkout")}
                 >
                   <ListItemIcon>
                     <ContentPasteGoIcon />
@@ -188,7 +189,7 @@ export const Navbar = () => {
                         ? ""
                         : "none",
                   }}
-                  onClick={(event) => navigate("/book/create")}
+                  onClick={(_event) => navigate("/book/create")}
                 >
                   <ListItemIcon>
                     <BookmarkAddIcon />
@@ -199,7 +200,7 @@ export const Navbar = () => {
                   sx={{
                     pl: 4,
                   }}
-                  onClick={(event) => navigate("/book/list")}
+                  onClick={(_event) => navigate("/book/list")}
                 >
                   <ListItemIcon>
                     <AutoStoriesIcon />
@@ -235,7 +236,7 @@ export const Navbar = () => {
                         ? ""
                         : "none",
                   }}
-                  onClick={(event) => navigate("/user/create")}
+                  onClick={(_event) => navigate("/user/create")}
                 >
                   <ListItemIcon>
                     <PersonAddIcon />
@@ -250,7 +251,7 @@ export const Navbar = () => {
                         ? ""
                         : "none",
                   }}
-                  onClick={(event) => navigate("/user/list")}
+                  onClick={(_event) => navigate("/user/list")}
                 >
                   <ListItemIcon>
                     <FormatListBulletedIcon />
@@ -278,7 +279,7 @@ export const Navbar = () => {
                     pl: 4,
                     display: userAuth === "authenticated" ? "none" : "",
                   }}
-                  onClick={(event) => navigate("/auth/signin")}
+                  onClick={(_event) => navigate("/auth/signin")}
                 >
                   <ListItemIcon>
                     <LoginIcon />
