@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -15,6 +15,7 @@ import {
 import { startGetBookById } from "../../redux/thunk/book/book.thunk";
 import { setBookDefaultValues } from "../../redux/slice/book/book.slice";
 import { startCheckoutCreate } from "../../redux/thunk/checkout/checkout.thunk";
+import { setCheckoutDefaultValues } from "../../redux/slice/checkout/checkout.slice";
 
 export const BookDetail = () => {
   const { t } = useTranslation();
@@ -29,13 +30,18 @@ export const BookDetail = () => {
   const { records: authRecords } = useSelector((store: any) => store.auth);
   const {
     isExecutingRequest: isExecutingCheckoutRequest,
-    status,
     records: checkoutRecords,
   } = useSelector((store: any) => store.checkout);
+  const [initial, setInitial] = useState(true);
 
   useEffect(() => {
+    if (!id) {
+      return navigate("/book/list");
+    }
+    dispatch(setCheckoutDefaultValues());
     dispatch(setBookDefaultValues());
     dispatch(startGetBookById(id));
+    setInitial(false);
   }, []);
 
   useEffect(() => {
@@ -43,6 +49,12 @@ export const BookDetail = () => {
       navigate("/book/list");
     }
   }, [bookErrors]);
+
+  useEffect(() => {
+    if (checkoutRecords && !initial) {
+      navigate(`/checkout/${authRecords.uid}`);
+    }
+  }, [checkoutRecords]);
 
   const onCheckoutCreate = (event: any) => {
     dispatch(startCheckoutCreate(records[0]._id));
@@ -142,7 +154,7 @@ export const BookDetail = () => {
           variant="contained"
           fullWidth
           disabled={
-            (!!records && records[0].stock > 0) || !isExecutingCheckoutRequest
+            (!!records && records[0].stock > 0) || isExecutingCheckoutRequest
               ? false
               : true
           }

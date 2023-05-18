@@ -26,4 +26,13 @@ export const navbar = {
       button: "Book list",
     },
   },
+  checkout: {
+    button: "Checkouts",
+    myCheckouts: {
+      button: "My checkouts",
+    },
+    userCheckouts: {
+      button: "User's checkouts",
+    },
+  },
 };

@@ -22,6 +22,7 @@ import {
   MenuItem,
   TextField,
   Button,
+  Alert,
 } from "@mui/material";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 
@@ -176,6 +177,11 @@ export const BookList = () => {
             </Grid>
           </Grid>
         </Box>
+      </Grid>
+      <Grid item>
+        <Alert severity="info" sx={{ maxWidth: "300px", m: "0 auto" }}>
+          {t("ui.text.book.bookInfo")}
+        </Alert>
       </Grid>
       <Grid item sx={{ width: "100%" }}>
         <TableContainer

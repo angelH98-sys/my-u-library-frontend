@@ -12,4 +12,5 @@ export const tittles = {
     gettingBook: "Getting book information...",
     list: "Book list",
   },
+  checkout: "User's checkouts",
 };

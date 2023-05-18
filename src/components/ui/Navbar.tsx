@@ -30,6 +30,9 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import BookIcon from "@mui/icons-material/Book";
+import ChecklistIcon from "@mui/icons-material/Checklist";
+import ReceiptIcon from "@mui/icons-material/Receipt";
+import ContentPasteGoIcon from "@mui/icons-material/ContentPasteGo";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 
 import { logoutFromFirebase } from "../../redux/thunk/user/user.thunk";
@@ -42,6 +45,7 @@ export const Navbar = () => {
     account: false,
     user: false,
     book: false,
+    checkout: false,
   });
   const {
     status: userAuth,
@@ -121,6 +125,55 @@ export const Navbar = () => {
         <Box sx={{ width: "auto" }} role="presentation">
           <List>
             <ListItem disablePadding>
+              <ListItemButton
+                onClick={changeToggle("checkout", !toggle["checkout"])}
+              >
+                <ListItemIcon>
+                  <ChecklistIcon />
+                </ListItemIcon>
+                <ListItemText primary={t("ui.navbar.checkout.button")} />
+                {toggle["checkout"] ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+            </ListItem>
+            <Collapse in={toggle["checkout"]} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemButton
+                  sx={{
+                    pl: 4,
+                    display:
+                      userAuth === "authenticated" && records.role == "lib"
+                        ? "none"
+                        : "",
+                  }}
+                  onClick={(event) => navigate(`/checkout/${records.uid}`)}
+                >
+                  <ListItemIcon>
+                    <ReceiptIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={t("ui.navbar.checkout.myCheckouts.button")}
+                  />
+                </ListItemButton>
+                <ListItemButton
+                  sx={{
+                    pl: 4,
+                    display:
+                      userAuth === "authenticated" && records.role == "lib"
+                        ? ""
+                        : "none",
+                  }}
+                  onClick={(event) => navigate("/checkout")}
+                >
+                  <ListItemIcon>
+                    <ContentPasteGoIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={t("ui.navbar.checkout.userCheckouts.button")}
+                  />
+                </ListItemButton>
+              </List>
+            </Collapse>
+            <ListItem disablePadding>
               <ListItemButton onClick={changeToggle("book", !toggle["book"])}>
                 <ListItemIcon>
                   <BookIcon />
@@ -134,6 +187,10 @@ export const Navbar = () => {
                 <ListItemButton
                   sx={{
                     pl: 4,
+                    display:
+                      userAuth === "authenticated" && records.role == "lib"
+                        ? ""
+                        : "none",
                   }}
                   onClick={(event) => navigate("/book/create")}
                 >
@@ -177,6 +234,10 @@ export const Navbar = () => {
                 <ListItemButton
                   sx={{
                     pl: 4,
+                    display:
+                      userAuth === "authenticated" && records.role == "lib"
+                        ? ""
+                        : "none",
                   }}
                   onClick={(event) => navigate("/user/create")}
                 >
@@ -188,6 +249,10 @@ export const Navbar = () => {
                 <ListItemButton
                   sx={{
                     pl: 4,
+                    display:
+                      userAuth === "authenticated" && records.role == "lib"
+                        ? ""
+                        : "none",
                   }}
                   onClick={(event) => navigate("/user/list")}
                 >

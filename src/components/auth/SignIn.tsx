@@ -54,7 +54,7 @@ export const SignIn = () => {
   };
 
   useEffect(() => {
-    !isExecutingRequest && status == "authenticated" && navigate("/");
+    !isExecutingRequest && status == "authenticated" && navigate("/book/list");
   }, [status]);
 
   return (

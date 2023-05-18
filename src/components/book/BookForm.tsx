@@ -16,16 +16,18 @@ import {
 } from "@mui/material";
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 
-import { setBookInitialState } from "../../redux/slice/author/author.slice";
 import { startBookCreate } from "../../redux/thunk/book/book.thunk";
+import { setBookDefaultValues } from "../../redux/slice/book/book.slice";
 
 export const BookForm = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [initial, setInitial] = useState(true);
 
   useEffect(() => {
-    dispatch(setBookInitialState());
+    dispatch(setBookDefaultValues());
+    setInitial(false);
   }, []);
 
   const {
@@ -49,7 +51,7 @@ export const BookForm = () => {
   });
 
   useEffect(() => {
-    if (records) {
+    if (records && !initial) {
       navigate(`/book/detail/${records[0]._id}`);
     }
   }, [records]);
