@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 import {
@@ -16,11 +16,12 @@ import { startGetBookById } from "../../redux/thunk/book/book.thunk";
 import { setBookDefaultValues } from "../../redux/slice/book/book.slice";
 import { startCheckoutCreate } from "../../redux/thunk/checkout/checkout.thunk";
 import { setCheckoutDefaultValues } from "../../redux/slice/checkout/checkout.slice";
+import { useAppDispatch } from "../../redux/store/store.redux";
 
 export const BookDetail = () => {
   const { t } = useTranslation();
   const { id } = useParams();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {
     records,

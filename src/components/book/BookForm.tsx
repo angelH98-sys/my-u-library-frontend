@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -18,10 +18,11 @@ import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 
 import { startBookCreate } from "../../redux/thunk/book/book.thunk";
 import { setBookDefaultValues } from "../../redux/slice/book/book.slice";
+import { useAppDispatch } from "../../redux/store/store.redux";
 
 export const BookForm = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [initial, setInitial] = useState(true);
 

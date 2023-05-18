@@ -1,6 +1,6 @@
 import { useEffect, useState, MouseEvent, ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import {
   Alert,
@@ -26,10 +26,11 @@ import {
   startGetAllCheckouts,
   startUpdateCheckout,
 } from "../../redux/thunk/checkout/checkout.thunk";
+import { useAppDispatch } from "../../redux/store/store.redux";
 
 export const Checkout = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { id } = useParams();
   const { records, _metadata, isExecutingRequest } = useSelector(
     (store: any) => store.checkout

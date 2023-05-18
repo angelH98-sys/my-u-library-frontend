@@ -20,13 +20,14 @@ import {
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { startSignIn } from "../../redux/thunk/user/user.thunk";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../redux/store/store.redux";
 
 export const SignIn = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const {

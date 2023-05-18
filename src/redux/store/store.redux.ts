@@ -5,6 +5,7 @@ import { authorSlice } from "../slice/author/author.slice";
 import { genreSlice } from "../slice/genre/genre.slice";
 import { bookSlice } from "../slice/book/book.slice";
 import { checkoutSlice } from "../slice/checkout/checkout.slice";
+import { useDispatch } from "react-redux";
 
 export const reduxStore = configureStore({
   reducer: {
@@ -16,3 +17,5 @@ export const reduxStore = configureStore({
     checkout: checkoutSlice.reducer,
   },
 });
+
+export const useAppDispatch: () => typeof reduxStore.dispatch = useDispatch;

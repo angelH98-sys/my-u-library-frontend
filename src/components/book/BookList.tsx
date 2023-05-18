@@ -1,6 +1,6 @@
 import { useEffect, useState, MouseEvent, ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import {
   Grid,
@@ -30,10 +30,11 @@ import { startGetPaginatedBooks } from "../../redux/thunk/book/book.thunk";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { setBookDefaultValues } from "../../redux/slice/book/book.slice";
+import { useAppDispatch } from "../../redux/store/store.redux";
 
 export const BookList = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { records, _metadata, isExecutingRequest } = useSelector(
     (store: any) => store.book

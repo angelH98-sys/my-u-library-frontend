@@ -47,11 +47,7 @@ export const Navbar = () => {
     book: false,
     checkout: false,
   });
-  const {
-    status: userAuth,
-    records,
-    isExecutingRequest,
-  } = useSelector((state: any) => state.auth);
+  const { status: userAuth, records } = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
