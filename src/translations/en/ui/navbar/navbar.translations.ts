@@ -22,5 +22,8 @@ export const navbar = {
     create: {
       button: "Create book",
     },
+    list: {
+      button: "Book list",
+    },
   },
 };

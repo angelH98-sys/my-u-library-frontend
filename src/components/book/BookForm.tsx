@@ -48,6 +48,12 @@ export const BookForm = () => {
     },
   });
 
+  useEffect(() => {
+    if (records) {
+      navigate(`/book/detail/${records[0]._id}`);
+    }
+  }, [records]);
+
   const onSubmit = (data: any) => {
     dispatch(startBookCreate(data));
   };

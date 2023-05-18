@@ -30,6 +30,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import BookIcon from "@mui/icons-material/Book";
+import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 
 import { logoutFromFirebase } from "../../redux/thunk/user/user.thunk";
 
@@ -140,6 +141,17 @@ export const Navbar = () => {
                     <BookmarkAddIcon />
                   </ListItemIcon>
                   <ListItemText primary={t("ui.navbar.book.create.button")} />
+                </ListItemButton>
+                <ListItemButton
+                  sx={{
+                    pl: 4,
+                  }}
+                  onClick={(event) => navigate("/book/list")}
+                >
+                  <ListItemIcon>
+                    <AutoStoriesIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={t("ui.navbar.book.list.button")} />
                 </ListItemButton>
               </List>
             </Collapse>

@@ -8,5 +8,7 @@ export const tittles = {
   },
   book: {
     form: "New book",
+    details: "Book details",
+    list: "Book list",
   },
 };

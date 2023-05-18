@@ -4,4 +4,8 @@ export const book = {
   genre: "Book's genre",
   stock: "Book's stock",
   publishedYear: "Book's published year",
+  search: {
+    param: "Field to filter",
+    text: "Text to filter",
+  },
 };
