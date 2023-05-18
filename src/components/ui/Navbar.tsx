@@ -124,6 +124,9 @@ export const Navbar = () => {
             <ListItem disablePadding>
               <ListItemButton
                 onClick={changeToggle("checkout", !toggle["checkout"])}
+                sx={{
+                  display: userAuth === "authenticated" ? "" : "none",
+                }}
               >
                 <ListItemIcon>
                   <ChecklistIcon />
@@ -138,9 +141,9 @@ export const Navbar = () => {
                   sx={{
                     pl: 4,
                     display:
-                      userAuth === "authenticated" && records.role == "lib"
-                        ? "none"
-                        : "",
+                      userAuth === "authenticated" && records.role == "std"
+                        ? ""
+                        : "none",
                   }}
                   onClick={(_event) => navigate(`/checkout/${records.uid}`)}
                 >
@@ -171,7 +174,12 @@ export const Navbar = () => {
               </List>
             </Collapse>
             <ListItem disablePadding>
-              <ListItemButton onClick={changeToggle("book", !toggle["book"])}>
+              <ListItemButton
+                onClick={changeToggle("book", !toggle["book"])}
+                sx={{
+                  display: userAuth === "authenticated" ? "" : "none",
+                }}
+              >
                 <ListItemIcon>
                   <BookIcon />
                 </ListItemIcon>
@@ -199,6 +207,7 @@ export const Navbar = () => {
                 <ListItemButton
                   sx={{
                     pl: 4,
+                    display: userAuth === "authenticated" ? "" : "none",
                   }}
                   onClick={(_event) => navigate("/book/list")}
                 >
