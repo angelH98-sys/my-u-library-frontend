@@ -28,6 +28,7 @@ import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import { startGetPaginatedBooks } from "../../redux/thunk/book/book.thunk";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { setBookDefaultValues } from "../../redux/slice/book/book.slice";
 
 export const BookList = () => {
   const { t } = useTranslation();
@@ -47,6 +48,7 @@ export const BookList = () => {
   const [page, setPage] = useState(0);
 
   useEffect(() => {
+    dispatch(setBookDefaultValues());
     dispatch(
       startGetPaginatedBooks(
         rowsPerPage,

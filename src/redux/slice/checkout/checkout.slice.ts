@@ -5,49 +5,38 @@ const initialState = {
   formData: null,
   isExecutingRequest: false,
   records: null,
-  _metadata: null,
   status: null,
 };
 
-export const bookSlice = createSlice({
-  name: "book",
+export const checkoutSlice = createSlice({
+  name: "checkout",
   initialState,
   reducers: {
-    setBookDefaultValues: (state) => {
-      state.errors = null;
-      state.formData = null;
-      state.isExecutingRequest = false;
-      state.records = null;
-      state._metadata = null;
-      state.status = null;
-    },
-    executingBookQuery: (state, { payload = {} }) => {
+    executingCheckoutQuery: (state, { payload = {} }) => {
       const { formData } = payload;
 
       state.errors = null;
       state.formData = formData;
       state.isExecutingRequest = true;
       state.records = null;
-      state._metadata = null;
       state.status = null;
     },
-    bookQuerySucceed: (
+    checkoutQuerySucceed: (
       state,
       action = {
         payload: undefined,
         type: "",
       }
     ) => {
-      const { records = null, status = 200, _metadata = null } = action.payload;
+      const { records = null, status = 200 } = action.payload;
 
       state.errors = null;
       state.formData = null;
       state.isExecutingRequest = false;
       state.records = records;
-      state._metadata = _metadata;
       state.status = status;
     },
-    bookQueryFailed: (
+    checkoutQueryFailed: (
       state,
       action = {
         payload: undefined,
@@ -60,14 +49,12 @@ export const bookSlice = createSlice({
       state.formData = null;
       state.isExecutingRequest = false;
       state.records = null;
-      state._metadata = null;
       state.status = status;
     },
   },
 });
 export const {
-  executingBookQuery,
-  bookQuerySucceed,
-  bookQueryFailed,
-  setBookDefaultValues,
-} = bookSlice.actions;
+  executingCheckoutQuery,
+  checkoutQuerySucceed,
+  checkoutQueryFailed,
+} = checkoutSlice.actions;

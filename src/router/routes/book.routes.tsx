@@ -1,7 +1,6 @@
 import { BookDetail } from "../../components/book/BookDetail";
 import { BookForm } from "../../components/book/BookForm";
 import { BookList } from "../../components/book/BookList";
-import { getBookInBackend } from "../loader/book.loader";
 
 export const BookRoutes = [
   {
@@ -15,6 +14,5 @@ export const BookRoutes = [
   {
     path: "book/detail/:id",
     element: <BookDetail />,
-    loader: getBookInBackend,
   },
 ];
